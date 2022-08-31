@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todowithstatemanager/modules/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todowithstatemanager/modules/task_data.dart';
 
 class AddTaskScreen extends StatefulWidget {
-  final Function(String) addTaskCallback;
-
-  AddTaskScreen(this.addTaskCallback);
+  AddTaskScreen();
 
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
@@ -58,7 +59,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 backgroundColor: Colors.lightBlueAccent,
               ),
               onPressed: () {
-                widget.addTaskCallback(newTaskTitle);
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTaskTitle);
+                Navigator.pop(context);
               },
             )
           ],
